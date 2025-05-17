@@ -12,6 +12,7 @@ module.exports = {
       port: 8564,
       liveReload: true,
       historyApiFallback: true,
+      hot: true,
     },
     mode: "production",
     module: {
