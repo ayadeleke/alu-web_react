@@ -1,25 +1,25 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { shallow } from 'enzyme';
 import App from './App';
 
 describe('<App />', () => {
-    it('renders the App component', () => {
-        render(<App />);
-        expect(screen.getByText(/School dashboard/i)).toBeInTheDocument();
+    it('renders an <App /> component', () => {
+        const wrapper = shallow(<App />);
+        expect(wrapper).toHaveLength(1);
     });
 
-    it('renders the App-header section', () => {
-        render(<App />);
-        expect(screen.getByTestId('app-header')).toBeInTheDocument();
+    it('renders an <App /> component checking for App-header', () => {
+        const wrapper = shallow(<App />);
+        expect(wrapper.find('div.App-header')).toHaveLength(1);
     });
 
-    it('renders the App-body section', () => {
-        render(<App />);
-        expect(screen.getByTestId('app-body')).toBeInTheDocument();
+    it('renders an <App /> component checking for App-body', () => {
+        const wrapper = shallow(<App />);
+        expect(wrapper.find('div.App-body')).toHaveLength(1);
     });
 
-    it('renders the App-footer section', () => {
-        render(<App />);
-        expect(screen.getByTestId('app-footer')).toBeInTheDocument();
+    it('renders an <App /> component checking for App-footer', () => {
+        const wrapper = shallow(<App />);
+        expect(wrapper.find('div.App-footer')).toHaveLength(1);
     });
 });

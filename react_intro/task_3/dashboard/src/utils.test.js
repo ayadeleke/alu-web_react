@@ -1,19 +1,21 @@
+// In strict assertion mode, non - strict methods behave like their corresponding strict methods.For example, assert.deepEqual() will behave like assert.deepStrictEqual().
+import { strict as assert } from 'assert';
 import { getFullYear, getFooterCopy, getLatestNotification } from './utils';
 
 describe('Test Utils', () => {
+
     it('Tests that getFullYear is current', () => {
-        expect(getFullYear()).toBe(new Date().getFullYear());
+        assert.equal(getFullYear(), new Date().getFullYear());
     });
-
     it('Validates the result of getFooterCopy with true', () => {
-        expect(getFooterCopy(true)).toBe('Holberton School.');
+        assert.equal(getFooterCopy(true), 'Holberton School.');
     });
-
     it('Validates the result of getFooterCopy with false', () => {
-        expect(getFooterCopy(false)).toBe('Holberton School main dashboard');
+        assert.equal(getFooterCopy(false), 'Holberton School main dashboard');
     });
 
     it('checks return of getLatestNotification', () => {
-        expect(getLatestNotification()).toEqual({ __html: '<strong>Urgent requirement</strong> - complete by EOD' });
+        // use JSON.stringify because
+        assert.equal(JSON.stringify(getLatestNotification()), JSON.stringify({ __html: '<strong>Urgent requirement</strong> - complete by EOD' }));
     });
 });
