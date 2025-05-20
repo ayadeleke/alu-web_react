@@ -11,9 +11,30 @@ import CourseList from '../CourseList/CourseList';
 import { getLatestNotification } from '../utils/utils';
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleKeydown = this.handleKeydown.bind(this);
+  }
+
+  // Lifecycle Methods
+  componentDidMount() {
+    window.addEventListener('keydown', this.handleKeydown);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.handleKeydown);
+  }
+
+  // Handle Log out
+  handleKeydown(e) {
+    if (e.ctrlKey && e.key === 'h') {
+      alert('Logging you out');
+      this.props.logOut();
+    }
+  }
+
   render() {
-    // instantiate vars from props
-    const { isLoggedIn } = this.props;
+    const { isLoggedIn, logOut } = this.props;
 
     const listCourses = [
       { id: 1, name: 'ES6', credit: 60 },
@@ -42,10 +63,12 @@ class App extends React.Component {
 
 App.propTypes = {
   isLoggedIn: PropTypes.bool,
+  logOut: PropTypes.func,
 };
 
 App.defaultProps = {
   isLoggedIn: false,
+  logOut: () => {},
 };
 
 export default hot(module)(App);
