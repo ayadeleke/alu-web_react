@@ -1,5 +1,6 @@
-import Enzyme from 'enzyme';
-import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
-import 'regenerator-runtime/runtime'
+import { configure } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+// const enzyme = require('enzyme');
+// const ad = require('enzyme-adapter-react-16')
 
-Enzyme.configure({ adapter: new Adapter() });
+configure({ adapter: new Adapter() });

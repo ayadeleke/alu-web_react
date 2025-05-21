@@ -1,26 +1,40 @@
-import React, { memo } from 'react';
-import './Notifications.css';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-// functional component ES6 shortcut
-const NotificationItem = ({ type, html, value, markAsRead }) => {
-    // JSX goes here
+class NotificationItem extends React.PureComponent {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
     return (
-        <li
-            data-notification-type={ type } dangerouslySetInnerHTML={ html }
-            onClick={markAsRead}
-        >{ value }</li>
+      this.props.value ? 
+      <li
+      data-notification-type={this.props.type}
+      onClick={() => this.props.markAsRead(this.props.id)}
+      >{this.props.value}</li> 
+      :
+      <li
+      data-notification-type={this.props.type}
+      dangerouslySetInnerHTML={this.props.html}
+      onClick={() => {console.log('empty func');}}
+      ></li>
     );
+  }
+}
+
+NotificationItem.defaultProps = {
+  type: 'default',
+  markAsRead: () => {console.log('empty func');},
+	id: 0
 };
 
 NotificationItem.propTypes = {
-    html: PropTypes.shape({ __html: PropTypes.string }),
-    value: PropTypes.string,
-    type: PropTypes.string.isRequired
+  html: PropTypes.shape({__html: PropTypes.string}),
+  type: PropTypes.string.isRequired,
+  value: PropTypes.string,
+  markAsRead: PropTypes.func,
+  id: PropTypes.number
 };
 
-NotificationItem.defaultProps = {
-    type: 'default',
-}
-
-export default memo(NotificationItem);
+export default NotificationItem;
