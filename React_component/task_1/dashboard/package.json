@@ -1,7 +1,7 @@
 {
-  "name": "task_5",
+  "name": "task_1",
   "version": "1.0.0",
-  "description": "task 5 of 0x02-react intro",
+  "description": "",
   "main": "./src/index.js",
   "jest": {
     "setupFilesAfterEnv": [
