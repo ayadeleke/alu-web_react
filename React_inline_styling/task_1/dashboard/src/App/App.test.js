@@ -1,7 +1,11 @@
 /**
  * @jest-environment jsdom
  */
-jest.mock('aphrodite');
+jest.mock('aphrodite', () => ({
+  css: (...args) => args.join(' '),
+  StyleSheet: { create: styles => styles },
+  StyleSheetTestUtils: jest.requireActual('aphrodite').StyleSheetTestUtils,
+}));
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import App from './App';
@@ -12,6 +16,15 @@ import CourseList from '../CourseList/CourseList';
 import Notifications from '../Notifications/Notifications';
 import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBottom';
 import BodySection from '../BodySection/BodySection';
+import { StyleSheetTestUtils } from 'aphrodite';
+
+beforeAll(() => {
+  StyleSheetTestUtils.suppressStyleInjection();
+});
+
+afterAll(() => {
+  StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+});
 
 describe('<App />', () => {
   let alertMock;

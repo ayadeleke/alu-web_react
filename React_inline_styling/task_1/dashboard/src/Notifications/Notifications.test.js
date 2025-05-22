@@ -1,8 +1,21 @@
-jest.mock('aphrodite');
+jest.mock('aphrodite', () => ({
+  css: (...args) => args.join(' '),
+  StyleSheet: { create: styles => styles },
+  StyleSheetTestUtils: jest.requireActual('aphrodite').StyleSheetTestUtils,
+}));
 import React from 'react';
 import { shallow } from 'enzyme';
 import Notifications from './Notifications';
 import NotificationItem from './NotificationItem';
+import { StyleSheetTestUtils } from 'aphrodite';
+
+beforeAll(() => {
+  StyleSheetTestUtils.suppressStyleInjection();
+});
+
+afterAll(() => {
+  StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+});
 
 const listNotifications = [
   { id: 1, type: 'default', value: 'New course available' },

@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import NotificationItem from './NotificationItem';
 import { StyleSheet, css } from 'aphrodite';
-// Remove: import './Notifications.css';
 
 const styles = StyleSheet.create({
   notifications: {

@@ -15,6 +15,7 @@ const styles = StyleSheet.create({
   appBody: {
     padding: '40px 24px',
     minHeight: 'calc(100vh - 200px)',
+    position: 'relative',
   },
   appFooter: {
     fontStyle: 'italic',
