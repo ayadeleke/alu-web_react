@@ -17,9 +17,8 @@ describe('App', () => {
         expect(wrapper.length).toBe(1)
     });
     test("App renders a div with the class: App-header", () => {
-        wrapper.setProps({isLoggedIn: true})
-        // console.debug(wrapper.html())
-        expect(wrapper.find('App-header').length).toBe(0)
+        wrapper.setProps({ isLoggedIn: true });
+        expect(wrapper.find('.App-header').length).toBe(1);
     });
     test("App renders a div with the class: App-body", () => {
         wrapper.setProps({isLoggedIn: true})
