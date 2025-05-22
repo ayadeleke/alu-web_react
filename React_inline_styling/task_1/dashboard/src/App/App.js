@@ -1,8 +1,6 @@
-import './App.css';
 import React from 'react';
 import { hot } from 'react-hot-loader';
 import PropTypes from 'prop-types';
-
 import Header from '../Header/Header';
 import Login from '../Login/Login';
 import Footer from '../Footer/Footer';
@@ -14,16 +12,23 @@ import { getLatestNotification } from '../utils/utils';
 import { StyleSheet, css } from 'aphrodite';
 
 const styles = StyleSheet.create({
-  /* App-footer */
-
-  AppFooter: {
+  appBody: {
+    padding: '40px 24px',
+    minHeight: 'calc(100vh - 200px)',
+  },
+  appFooter: {
     fontStyle: 'italic',
     borderTop: '4px solid #FF0000',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     minHeight: '5vmin',
-  }
+    width: '100%',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    background: '#fff',
+  },
 });
 
 class App extends React.Component {
@@ -32,7 +37,6 @@ class App extends React.Component {
     this.handleKeydown = this.handleKeydown.bind(this);
   }
 
-  // Lifecycle Methods
   componentDidMount() {
     window.addEventListener('keydown', this.handleKeydown);
   }
@@ -41,7 +45,6 @@ class App extends React.Component {
     window.removeEventListener('keydown', this.handleKeydown);
   }
 
-  // Handle Log out
   handleKeydown(e) {
     if (e.ctrlKey && e.key === 'h') {
       alert('Logging you out');
@@ -50,7 +53,7 @@ class App extends React.Component {
   }
 
   render() {
-    const { isLoggedIn, logOut } = this.props;
+    const { isLoggedIn } = this.props;
 
     const listCourses = [
       { id: 1, name: 'ES6', credit: 60 },
@@ -62,29 +65,31 @@ class App extends React.Component {
       { id: 1, type: 'default', value: 'New course available' },
       { id: 2, type: 'urgent', value: 'New course available' },
       { id: 3, type: 'urgent', html: htmlObj },
-    ]
+    ];
 
     return (
       <>
-        <Notifications displayDrawer={ false } listNotifications={ listNotifications } />
-        <div className="App">
+        <Notifications displayDrawer={false} listNotifications={listNotifications} />
+        <div className={css(styles.appBody)}>
           <Header />
-          { isLoggedIn ?
-          <BodySectionWithMarginBottom title="Course list">
-              <CourseList listCourses={ listCourses } />
-          </BodySectionWithMarginBottom>
-           :
-          <BodySectionWithMarginBottom title="Log in to continue">
-            <Login />
-          </BodySectionWithMarginBottom>
-          }
+          {isLoggedIn ? (
+            <BodySectionWithMarginBottom title="Course list">
+              <CourseList listCourses={listCourses} />
+            </BodySectionWithMarginBottom>
+          ) : (
+            <BodySectionWithMarginBottom title="Log in to continue">
+              <Login />
+            </BodySectionWithMarginBottom>
+          )}
           <BodySection title="News from the School">
             <p>Graduation date is January 28th!</p>
           </BodySection>
-          <Footer className={css(styles.AppFooter)} />
         </div>
+        <footer className={css(styles.appFooter)}>
+          <Footer />
+        </footer>
       </>
-    )
+    );
   }
 }
 

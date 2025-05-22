@@ -1,3 +1,4 @@
+jest.mock('aphrodite');
 import React from 'react';
 import { shallow } from 'enzyme';
 import BodySection from './BodySection';

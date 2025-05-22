@@ -5,11 +5,6 @@ import React, { Component } from 'react';
 import { mount } from 'enzyme';
 import Login from '../Login/Login';
 import WithLogging from './WithLogging';
-import { StyleSheetTestUtils } from 'aphrodite';
-
-beforeEach(() => {
-    StyleSheetTestUtils.suppressStyleInjection();
-});
 
 describe('<WithLogging /> HOC', () => {
     it('verifies console.log output when mounting and umounting pure HTML', () => {
