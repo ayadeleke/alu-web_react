@@ -13,7 +13,7 @@ describe('App', () => {
     beforeEach(() => {
         wrapper = shallow(<App />)
     })
-    test('App should not rash', () => {
+    test('App should not crash', () => {
         expect(wrapper.length).toBe(1)
     });
     test("App renders a div with the class: App-header", () => {

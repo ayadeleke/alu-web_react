@@ -53,7 +53,7 @@ describe('<App />', () => {
         expect(wrapper.find(CourseList)).toHaveLength(1);
     });
 
-    it('verifies that the user canlog out using ctrl + h', () => {
+    it('verifies that the user can log out using ctrl + h', () => {
         const events = {};
         window.addEventListener = jest.fn().mockImplementation((e, cb) => {
             events[e] = cb;
