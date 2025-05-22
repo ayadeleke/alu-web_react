@@ -12,12 +12,12 @@ import { getLatestNotification } from '../utils/utils';
 import { StyleSheet, css } from 'aphrodite';
 
 const styles = StyleSheet.create({
-  appBody: {
+  body: {
     padding: '40px 24px',
     minHeight: 'calc(100vh - 200px)',
     position: 'relative',
   },
-  appFooter: {
+  footer: {
     fontStyle: 'italic',
     borderTop: '4px solid #FF0000',
     display: 'flex',
@@ -71,7 +71,7 @@ class App extends React.Component {
     return (
       <>
         <Notifications displayDrawer={false} listNotifications={listNotifications} />
-        <div className={css(styles.appBody)}>
+        <div className={css(styles.body)}>
           <Header />
           {isLoggedIn ? (
             <BodySectionWithMarginBottom title="Course list">
@@ -86,7 +86,7 @@ class App extends React.Component {
             <p>Graduation date is January 28th!</p>
           </BodySection>
         </div>
-        <footer className={css(styles.appFooter)}>
+        <footer className={css(styles.footer)}>
           <Footer />
         </footer>
       </>
