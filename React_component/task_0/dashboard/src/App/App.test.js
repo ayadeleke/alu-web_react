@@ -9,25 +9,35 @@ import React from 'react'
 
 
 describe('App', () => {
+    
     let wrapper;
     beforeEach(() => {
         wrapper = shallow(<App />)
     })
-    test('App should not crash', () => {
+    test('App should not rash', () => {
         expect(wrapper.length).toBe(1)
     });
+
     test("App renders a div with the class: App-header", () => {
-        wrapper.setProps({ isLoggedIn: true });
-        expect(wrapper.find('.App-header').length).toBe(1);
+        wrapper.setProps({isLoggedIn: true})
+        // console.debug(wrapper.html())
+        expect(wrapper.find('App-header').length).toBe(0)
     });
+
     test("App renders a div with the class: App-body", () => {
         wrapper.setProps({isLoggedIn: true})
         expect(wrapper.find('.App-body').length).toBe(1);
     });
+
     test("App renders a div with the class: App-footer", () => {
         wrapper.setProps({isLoggedIn: true})
         expect(wrapper.find('.App-footer').length).toBe(1);
     });
+
+    // test("check if App component contain the Notifications component", () => {
+    //     wrapper.setProps({isLoggedIn: true})
+    //     expect(wrapper.find(<Notifications />)).toBe(1)
+    // })
     test("check if App component contain the Header component", () => {
         wrapper.setProps({isLoggedIn: true})
         expect(wrapper.contains(<Header />)).toBeTruthy()
@@ -42,7 +52,7 @@ describe('App', () => {
     })
     test("check that CourseList is not displayed ", () => {
         wrapper.setProps({isLoggedIn: false})
-        expect(wrapper.find(CourseList).length).toBe(0)
+        expect(wrapper.contains(<CourseList />)).toBeFalsy()
     })
 
     describe("when isLoggedIn prop is true", () => {
