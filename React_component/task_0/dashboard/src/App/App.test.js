@@ -43,7 +43,7 @@ describe('App', () => {
     })
     test("check that CourseList is not displayed ", () => {
         wrapper.setProps({isLoggedIn: false})
-        expect(wrapper.contains(<CourseList />)).toBeFalsy()
+        expect(wrapper.find(CourseList).length).toBe(0)
     })
 
     describe("when isLoggedIn prop is true", () => {
