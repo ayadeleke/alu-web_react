@@ -9,7 +9,6 @@ import React from 'react'
 
 
 describe('App', () => {
-    
     let wrapper;
     beforeEach(() => {
         wrapper = shallow(<App />)
