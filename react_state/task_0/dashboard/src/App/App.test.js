@@ -26,19 +26,48 @@ describe('<App />', () => {
     it('verifies that the default state for displayDrawer is false', () => {
         const wrapper = shallow(<App />);
         expect(wrapper.state('displayDrawer')).toBe(false);
-    })
+    });
 
     it('verifies that the state property displayDrawer correctly updates', () => {
-        const instance = mount(<App />).instance();
-        instance.setState({displayDrawer: false});
-        expect(instance.state['displayDrawer']).toBe(false);
-        instance.handleDisplayDrawer();
-        expect(instance.state['displayDrawer']).toBe(true);
+        const wrapper = mount(<App />);
+        wrapper.setState({ displayDrawer: false });
+        expect(wrapper.state('displayDrawer')).toBe(false);
+        wrapper.instance().handleDisplayDrawer();
+        expect(wrapper.state('displayDrawer')).toBe(true);
+    });
+
+    it('verifies that handleHideDrawer sets displayDrawer to false', () => {
+        const wrapper = mount(<App />);
+        wrapper.setState({ displayDrawer: true });
+        wrapper.instance().handleHideDrawer();
+        expect(wrapper.state('displayDrawer')).toBe(false);
     });
 
     it('renders an <App /> component checking for <Notifications />', () => {
         const wrapper = shallow(<App />);
         expect(wrapper.find(Notifications)).toHaveLength(1);
+    });
+
+    it('passes correct props to Notifications', () => {
+        const wrapper = shallow(<App />);
+        const notifications = wrapper.find(Notifications);
+        expect(notifications.prop('displayDrawer')).toBe(wrapper.state('displayDrawer'));
+        expect(typeof notifications.prop('handleDisplayDrawer')).toBe('function');
+        expect(typeof notifications.prop('handleHideDrawer')).toBe('function');
+    });
+
+    it('handleDisplayDrawer does not change displayDrawer if already true', () => {
+        const wrapper = mount(<App />);
+        wrapper.setState({ displayDrawer: true });
+        wrapper.instance().handleDisplayDrawer();
+        expect(wrapper.state('displayDrawer')).toBe(true);
+    });
+
+    it('handleHideDrawer does not change displayDrawer if already false', () => {
+        const wrapper = mount(<App />);
+        wrapper.setState({ displayDrawer: false });
+        wrapper.instance().handleHideDrawer();
+        expect(wrapper.state('displayDrawer')).toBe(false);
     });
 
     it('renders an <App /> component checking for <Header />', () => {
