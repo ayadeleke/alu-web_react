@@ -7,7 +7,7 @@ import { shallow, mount } from 'enzyme';
 import App from './App';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
-import Login from '../Login/Login';
+import Login from '../../../../task_0/dashboard/Login/Login';
 import Notifications from '../Notifications/Notifications';
 import CourseList from '../CourseList/CourseList';
 import { StyleSheetTestUtils } from 'aphrodite';

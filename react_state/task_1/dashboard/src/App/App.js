@@ -4,7 +4,7 @@ import { hot } from 'react-hot-loader';
 import PropTypes from 'prop-types';
 
 import Header from '../Header/Header';
-import Login from '../Login/Login';
+import Login from '../../../../task_0/dashboard/Login/Login';
 import Footer from '../Footer/Footer';
 import Notifications from '../Notifications/Notifications';
 import CourseList from '../CourseList/CourseList';

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, css, reset } from 'aphrodite';
 
 const styles = StyleSheet.create({
-   /* App-body */
+    /* App-body */
     appBody: {
         padding: '0px 32px',
         display: 'flex',
@@ -57,15 +57,14 @@ const styles = StyleSheet.create({
     },
 });
 
-function Login() {
-    const [ isLoggedIn, setLoggedIn ] = useState(false);
+function Login({ logIn }) {
     const [ email, setEmail ] = useState('');
     const [ password, setPassword ] = useState('');
     const [ enableSubmit, setEnableSubmit ] = useState(false);
 
     function handleLoginSubmit(e) {
         e.preventDefault();
-        setLoggedIn(true);
+        logIn(email, password);
         console.log('Logged in!');
     }
 
@@ -76,7 +75,7 @@ function Login() {
     // when email changes, check submit mode
     useEffect(() => {
         resetEnableSubmit();
-    }, [email])
+    }, [ email ]);
 
     function handleChangePassword(e) {
         setPassword(e.target.value);
@@ -85,55 +84,57 @@ function Login() {
     // when password changes, check submit mode
     useEffect(() => {
         resetEnableSubmit();
-    }, [password])
+    }, [ password ]);
 
     function resetEnableSubmit() {
         if (email !== '' && password !== '') {
             // disabled = false
             setEnableSubmit(true);
+            return false;
         } else {
             // disabled = true
             setEnableSubmit(false);
+            return true
         }
     }
 
     return (
-        <div className={css(styles.appBody)} id="Login">
-            <p className={css(styles.appBodyParagraph)}>Login to access the full dashboard</p>
+        <div className={ css(styles.appBody) } id="Login">
+            <p className={ css(styles.appBodyParagraph) }>Login to access the full dashboard</p>
             <form
-                className={css(styles.form)}
-                onSubmit={handleLoginSubmit}>
+                className={ css(styles.form) }
+                onSubmit={ handleLoginSubmit }>
                 <label
                     htmlFor="email"
-                    className={css(styles.formLabel)}
-                    >
-                    <span className={css(styles.appBodyLabelSpan)}>Email:</span>
+                    className={ css(styles.formLabel) }
+                >
+                    <span className={ css(styles.appBodyLabelSpan) }>Email:</span>
                     <input
-                        className={css(styles.appBodyInput)}
+                        className={ css(styles.appBodyInput) }
                         type="email"
                         name="email"
                         id="email"
-                        onChange={handleChangeEmail} />
+                        onChange={ handleChangeEmail } />
                 </label>
 
                 <label htmlFor="password"
                     className={ css(styles.formLabel) }>
-                    <span className={css(styles.appBodyLabelSpan)}>Password:</span>
+                    <span className={ css(styles.appBodyLabelSpan) }>Password:</span>
                     <input
-                        className={css(styles.appBodyInput)}
+                        className={ css(styles.appBodyInput) }
                         type="password"
                         name="password"
                         id="pwd"
-                        onChange={handleChangePassword} />
+                        onChange={ handleChangePassword } />
                 </label>
 
                 <input
-                type='submit'
-                id='submit'
-                value='OK'
-                className={css(styles.appBodyButton)}
-                disabled={!enableSubmit}
-                onClick={() => setLoggedIn(true)}></input>
+                    type='submit'
+                    id='submit'
+                    value='OK'
+                    className={ css(styles.appBodyButton) }
+                    disabled={ !enableSubmit }
+                    ></input>
             </form>
         </div>
     );
