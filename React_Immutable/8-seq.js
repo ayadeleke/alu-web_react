@@ -8,5 +8,5 @@ export function printBestStudents(object) {
       firstName: `${student.firstName[0].toUpperCase()}${student.firstName.slice(1)}`,
       lastName: `${student.lastName[0].toUpperCase()}${student.lastName.slice(1)}`,
     }));
-  console.log(bestStudents.toObject());
+  return bestStudents.toObject();
 }
